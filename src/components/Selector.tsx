@@ -80,7 +80,8 @@ export class Selector extends React.Component<ISelectorProps, ISelectorState> {
     searchResultsStyle: {},
     searchResultStyle: {},
     suggestionStyle: {},
-    suggestionsStyle: {}
+    suggestionsStyle: {},
+    showTrendingInitially: false,
   };
 
   public client: GiphyClient;
@@ -102,6 +103,38 @@ export class Selector extends React.Component<ISelectorProps, ISelectorState> {
     this.onQueryChange = this.onQueryChange.bind(this);
     this.onQueryExecute = this.onQueryExecute.bind(this);
     this.onSuggestionSelected = this.onSuggestionSelected.bind(this);
+    this.getTrendingGifs = this.getTrendingGifs.bind(this);
+  }
+
+  componentDidMount () {
+    if (this.props.showTrendingInitially) {
+      this.getTrendingGifs();
+    }
+  }
+
+  public getTrendingGifs(): void {
+    const { rating, limit } = this.props;
+    this.setState({
+      isPending: true,
+      searchError: null,
+    });
+
+    this.client.trendingGifs({
+      rating,
+      limit,
+    })
+    .then((result: ISearchResult) => {
+      this.setState({
+        isPending: false,
+        searchResult: result
+      });
+    })
+    .catch((err: Error) => {
+      this.setState({
+        isPending: false,
+        searchError: err
+      });
+    });
   }
 
   /**

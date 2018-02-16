@@ -16,6 +16,11 @@ export interface ISearchResult {
   gifObjects: IGifObject[];
 }
 
+export interface ITrendingParams {
+  rating: Rating;
+  limit: number;
+}
+
 export class GiphyClient {
   private client: any;
 
@@ -32,5 +37,11 @@ export class GiphyClient {
     return this.client.search("gifs", params).then(response => {
       return { gifObjects: response.data };
     });
+  }
+
+  public trendingGifs(params: ITrendingParams): Promise<ISearchResult> {
+    return this.client.trending("gifs", params).then(response => {
+      return { gifObjects: response.data }
+    })
   }
 }
