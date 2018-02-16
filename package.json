@@ -1,5 +1,5 @@
 {
-  "name": "react-giphy-selector",
+  "name": "@edtechfoundry/react-giphy-selector",
   "version": "0.0.1",
   "description": "A search & select React.JS component for picking the perfect giphy.",
   "main": "lib/index.js",
@@ -23,6 +23,8 @@
   "homepage": "https://github.com/tshaddix/react-giphy-selector#readme",
   "devDependencies": {
     "@types/react-dom": "^16.0.3",
+    "@types/react": "^16.0.33",
+    "@types/classnames": "^2.2.3",
     "awesome-typescript-loader": "^3.4.1",
     "css-loader": "^0.28.7",
     "file-loader": "^1.1.6",
@@ -35,10 +37,10 @@
     "webpack": "^3.10.0"
   },
   "dependencies": {
-    "@types/classnames": "^2.2.3",
-    "@types/react": "^16.0.33",
     "classnames": "^2.2.5",
-    "giphy-js-sdk-core": "^1.0.2",
+    "giphy-js-sdk-core": "^1.0.2"
+  },
+  "peerDependencies": {
     "react": "^16.2.0"
   }
 }

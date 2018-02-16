@@ -1,2 +1,6 @@
 example/
 docs/
+src/
+.idea/
+tsconfig.json
+webpack.config.js

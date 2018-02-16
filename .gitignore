@@ -59,3 +59,6 @@ typings/
 
 example/bundle.js
 example/bundle.js.map
+
+lib/
+.idea/
