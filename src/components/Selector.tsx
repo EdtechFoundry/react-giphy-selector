@@ -20,6 +20,7 @@ export interface ISelectorProps {
   resultColumns?: number;
   onGifSelected: (gifObject: IGifObject) => void;
   showGiphyMark?: boolean;
+  showTrendingInitially?: boolean;
 
   // query form style/content props
   queryFormClassName?: string;
