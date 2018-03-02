@@ -11,6 +11,7 @@ export interface ISearchResultsProps {
   onGifSelected: (gifObject: IGifObject) => void;
   searchResultsClassName?: string;
   searchResultsStyle: object;
+  searchResultsColumnStyle?: object;
   searchResultClassName?: string;
   searchResultStyle: object;
   searchResultImgStyle?: object;
@@ -64,6 +65,7 @@ export class SearchResults extends React.Component<ISearchResultsProps, {}> {
       onGifSelected,
       searchResultsClassName,
       searchResultsStyle,
+      searchResultsColumnStyle,
       searchResultClassName,
       searchResultStyle
     } = this.props;
@@ -77,7 +79,7 @@ export class SearchResults extends React.Component<ISearchResultsProps, {}> {
       >
         {columnGifs.map((column: IGifObject[], c: number) => (
           <li key={`column-${c}`}>
-            <ul>
+            <ul style={searchResultsColumnStyle}>
               {column.map((gifObject: IGifObject) => (
                 <SearchResult
                   searchResultClassName={searchResultClassName}

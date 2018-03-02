@@ -35,6 +35,7 @@ export interface ISelectorProps {
   // search results style
   searchResultsClassName?: string;
   searchResultsStyle?: object;
+  searchResultsColumnStyle?: object;
   searchResultClassName?: string;
   searchResultStyle?: object;
   searchResultImgStyle?: object;
@@ -83,6 +84,7 @@ export class Selector extends React.Component<ISelectorProps, ISelectorState> {
     footerStyle: {},
     searchErrorStyle: {},
     searchResultsStyle: {},
+    searchResultsColumnStyle: {},
     searchResultStyle: {},
     searchResultImgStyle: {},
     selectorStyle: {},
@@ -220,6 +222,7 @@ export class Selector extends React.Component<ISelectorProps, ISelectorState> {
 
       searchResultClassName,
       searchResultStyle,
+      searchResultsColumnStyle,
       searchResultsClassName,
       searchResultsStyle,
       searchResultImgStyle,
@@ -297,6 +300,7 @@ export class Selector extends React.Component<ISelectorProps, ISelectorState> {
             <SearchResults
               searchResultClassName={searchResultClassName}
               searchResultStyle={searchResultStyle}
+              searchResultsColumnStyle={searchResultsColumnStyle}
               searchResultsClassName={searchResultsClassName}
               searchResultsStyle={searchResultsStyle}
               searchResultImgStyle={searchResultImgStyle}
