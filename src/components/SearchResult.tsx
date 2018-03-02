@@ -9,6 +9,7 @@ export interface ISearchResultProps {
   onSelected: (gifObject: IGifObject) => void;
   searchResultClassName?: string;
   searchResultStyle: object;
+  searchResultImgStyle?: object;
 }
 
 export class SearchResult extends React.Component<ISearchResultProps, {}> {
@@ -25,7 +26,7 @@ export class SearchResult extends React.Component<ISearchResultProps, {}> {
   }
 
   public render(): JSX.Element {
-    const { gifObject, searchResultClassName, searchResultStyle } = this.props;
+    const { gifObject, searchResultClassName, searchResultStyle , searchResultImgStyle } = this.props;
 
     const sourceImage: IGifImage = gifObject.images.fixed_width;
 
@@ -37,7 +38,7 @@ export class SearchResult extends React.Component<ISearchResultProps, {}> {
           onClick={this.onClick}
           className={cn(defaultStyle.searchResult, searchResultClassName)}
         >
-          <img src={sourceImage.gif_url} />
+          <img style={searchResultImgStyle} src={sourceImage.gif_url} />
         </a>
       </li>
     );

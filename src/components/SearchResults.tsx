@@ -13,6 +13,7 @@ export interface ISearchResultsProps {
   searchResultsStyle: object;
   searchResultClassName?: string;
   searchResultStyle: object;
+  searchResultImgStyle?: object;
 }
 
 export class SearchResults extends React.Component<ISearchResultsProps, {}> {

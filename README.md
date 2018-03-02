@@ -76,6 +76,7 @@ Here are all the props available for styling the component:
 - `searchResultsStyle?: object`: A style object to the add to the search results container. You can find the default style in `src/components/SearchResults.css`.
 - `searchResultClassName?: string`: Additional `className` to add to a search result. Search results are `a` elements. You can find the default style in `src/components/SearchResult.css`.
 - `searchResultStyle?: object`: A style object to add to a search result. Search results are `a` elements. You can find the default style in `src/components/SearchResult.css`.
+- `searchResultImgStyle?: object`: A style object to add to a search result image. Search results are `img` elements.
 - `selectorStyle?: object`: A style object to add to the selector wrapper style.
 - `suggestionsClassName?: string`: Additional `className` to add to the suggestions container. You can find the default style in `src/components/Suggestions.css`.
 - `suggestionsStyle?: object`: A style object to add to the suggestions container. You can find the default style in `src/components/Suggestions.css`.

@@ -37,6 +37,7 @@ export interface ISelectorProps {
   searchResultsStyle?: object;
   searchResultClassName?: string;
   searchResultStyle?: object;
+  searchResultImgStyle?: object;
 
   // selector style
   selectorStyle?: object;
@@ -83,6 +84,7 @@ export class Selector extends React.Component<ISelectorProps, ISelectorState> {
     searchErrorStyle: {},
     searchResultsStyle: {},
     searchResultStyle: {},
+    searchResultImgStyle: {},
     selectorStyle: {},
     suggestionStyle: {},
     suggestionsStyle: {},
@@ -220,6 +222,7 @@ export class Selector extends React.Component<ISelectorProps, ISelectorState> {
       searchResultStyle,
       searchResultsClassName,
       searchResultsStyle,
+      searchResultImgStyle,
 
       selectorStyle,
 
@@ -296,6 +299,7 @@ export class Selector extends React.Component<ISelectorProps, ISelectorState> {
               searchResultStyle={searchResultStyle}
               searchResultsClassName={searchResultsClassName}
               searchResultsStyle={searchResultsStyle}
+              searchResultImgStyle={searchResultImgStyle}
               columns={resultColumns}
               gifObjects={searchResult.gifObjects}
               onGifSelected={onGifSelected}
