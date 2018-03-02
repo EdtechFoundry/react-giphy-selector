@@ -68,6 +68,7 @@ Here are all the props available for styling the component:
 - `queryFormInputClassName?: string`: Additional `className` for the text input in the query form. You can find the default style applied in `src/components/QueryForm.css`.
 - `queryFormSubmitClassName?: string`: Additional `className` for the submit button in the query form. You can find the default style applied in `src/components/QueryForm.css`.
 - `queryFormStyle?: object`: A style object to add to the query form style. You can find the default style applied in `src/components/QueryForm.css`.
+- `queryFormWrapperStyle?: object`: A style object to add to the query form wrapper style. You can find the default style applied in `src/components/QueryForm.css`.
 - `queryFormInputStyle?: object`: A style object to add to the text input in the query form. You can find the default style applied in `src/components/QueryForm.css`.
 - `queryFormSubmitStyle?: object`: A style object to add to the submit button in the query form. You can find the default style applied in `src/components/QueryForm.css`.
 - `queryFormSubmitContent?: string or Component`: You can pass in a `string` or your own component to render inside the submit button in the query form. This allows you to pass in things like custom icons. Default: `'Search'`.
@@ -75,6 +76,7 @@ Here are all the props available for styling the component:
 - `searchResultsStyle?: object`: A style object to the add to the search results container. You can find the default style in `src/components/SearchResults.css`.
 - `searchResultClassName?: string`: Additional `className` to add to a search result. Search results are `a` elements. You can find the default style in `src/components/SearchResult.css`.
 - `searchResultStyle?: object`: A style object to add to a search result. Search results are `a` elements. You can find the default style in `src/components/SearchResult.css`.
+- `selectorStyle?: object`: A style object to add to the selector wrapper style.
 - `suggestionsClassName?: string`: Additional `className` to add to the suggestions container. You can find the default style in `src/components/Suggestions.css`.
 - `suggestionsStyle?: object`: A style object to add to the suggestions container. You can find the default style in `src/components/Suggestions.css`.
 - `suggestionClassName?: string`: Additional `className` to add to a suggestion. This is an `a` element. You can find the default style in `src/components/Suggestion.css`.
