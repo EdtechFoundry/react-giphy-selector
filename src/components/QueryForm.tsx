@@ -8,6 +8,7 @@ export interface IQueryFormProps {
   queryFormInputClassName?: string;
   queryFormSubmitClassName?: string;
   queryFormStyle: object;
+  queryFormWrapperStyle: object;
   queryFormInputStyle: object;
   queryFormSubmitStyle: object;
   queryFormSubmitContent: any;
@@ -20,6 +21,7 @@ export interface IQueryFormProps {
 export class QueryForm extends React.Component<IQueryFormProps, {}> {
   public static defaultProps: Partial<IQueryFormProps> = {
     queryFormStyle: {},
+    queryFormWrapperStyle: {},
     queryFormInputStyle: {},
     queryFormSubmitStyle: {}
   };
@@ -56,13 +58,14 @@ export class QueryForm extends React.Component<IQueryFormProps, {}> {
       queryFormInputClassName,
       queryFormSubmitClassName,
       queryFormStyle,
+      queryFormWrapperStyle,
       queryFormInputStyle,
       queryFormSubmitStyle,
       queryFormSubmitContent
     } = this.props;
 
     return (
-      <div>
+      <div style={queryFormWrapperStyle}>
         <form
           style={queryFormStyle}
           className={cn(defaultStyle.queryForm, queryFormClassName)}

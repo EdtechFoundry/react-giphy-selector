@@ -27,6 +27,7 @@ export interface ISelectorProps {
   queryFormInputClassName?: string;
   queryFormSubmitClassName?: string;
   queryFormStyle?: object;
+  queryFormWrapperStyle?: object;
   queryFormInputStyle?: object;
   queryFormSubmitStyle?: object;
   queryFormSubmitContent?: any;
@@ -36,6 +37,9 @@ export interface ISelectorProps {
   searchResultsStyle?: object;
   searchResultClassName?: string;
   searchResultStyle?: object;
+
+  // selector style
+  selectorStyle?: object;
 
   suggestionsClassName?: string;
   suggestionsStyle?: object;
@@ -79,6 +83,7 @@ export class Selector extends React.Component<ISelectorProps, ISelectorState> {
     searchErrorStyle: {},
     searchResultsStyle: {},
     searchResultStyle: {},
+    selectorStyle: {},
     suggestionStyle: {},
     suggestionsStyle: {},
     showTrendingInitially: false,
@@ -206,6 +211,7 @@ export class Selector extends React.Component<ISelectorProps, ISelectorState> {
       queryFormInputClassName,
       queryFormSubmitClassName,
       queryFormStyle,
+      queryFormWrapperStyle,
       queryFormInputStyle,
       queryFormSubmitStyle,
       queryFormSubmitContent,
@@ -214,6 +220,8 @@ export class Selector extends React.Component<ISelectorProps, ISelectorState> {
       searchResultStyle,
       searchResultsClassName,
       searchResultsStyle,
+
+      selectorStyle,
 
       suggestionClassName,
       suggestionStyle,
@@ -235,7 +243,7 @@ export class Selector extends React.Component<ISelectorProps, ISelectorState> {
       !!suggestions.length && !searchResult && !isPending && !searchError;
 
     return (
-      <div>
+      <div style={selectorStyle}>
         <QueryForm
           queryInputPlaceholder={queryInputPlaceholder}
           onQueryChange={this.onQueryChange}
@@ -245,6 +253,7 @@ export class Selector extends React.Component<ISelectorProps, ISelectorState> {
           queryFormInputClassName={queryFormInputClassName}
           queryFormSubmitClassName={queryFormSubmitClassName}
           queryFormStyle={queryFormStyle}
+          queryFormWrapperStyle={queryFormWrapperStyle}
           queryFormInputStyle={queryFormInputStyle}
           queryFormSubmitStyle={queryFormSubmitStyle}
           queryFormSubmitContent={queryFormSubmitContent}
