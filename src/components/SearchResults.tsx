@@ -65,6 +65,7 @@ export class SearchResults extends React.Component<ISearchResultsProps, {}> {
       onGifSelected,
       searchResultsClassName,
       searchResultsStyle,
+      searchResultImgStyle,
       searchResultsColumnStyle,
       searchResultClassName,
       searchResultStyle
@@ -84,6 +85,7 @@ export class SearchResults extends React.Component<ISearchResultsProps, {}> {
                 <SearchResult
                   searchResultClassName={searchResultClassName}
                   searchResultStyle={searchResultStyle}
+                  searchResultImgStyle={searchResultImgStyle}
                   key={gifObject.id}
                   gifObject={gifObject}
                   onSelected={onGifSelected}
