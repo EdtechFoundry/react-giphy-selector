@@ -12,6 +12,7 @@ export interface IQueryFormProps {
   queryFormInputStyle: object;
   queryFormSubmitStyle: object;
   queryFormSubmitContent: any;
+  disableQueryFormButton?: boolean;
   onQueryChange: (q: string) => void;
   onQueryExecute: () => void;
   queryInputPlaceholder: string;
@@ -61,7 +62,8 @@ export class QueryForm extends React.Component<IQueryFormProps, {}> {
       queryFormWrapperStyle,
       queryFormInputStyle,
       queryFormSubmitStyle,
-      queryFormSubmitContent
+      queryFormSubmitContent,
+      disableQueryFormButton,
     } = this.props;
 
     return (
@@ -79,16 +81,18 @@ export class QueryForm extends React.Component<IQueryFormProps, {}> {
             onChange={this.onValueChange}
             placeholder={queryInputPlaceholder}
           />
-          <button
-            style={queryFormSubmitStyle}
-            type="submit"
-            className={cn(
-              defaultStyle.queryFormSubmit,
-              queryFormSubmitClassName
-            )}
-          >
-            {queryFormSubmitContent}
-          </button>
+          {
+            !disableQueryFormButton &&  (<button
+              style={queryFormSubmitStyle}
+              type="submit"
+              className={cn(
+                defaultStyle.queryFormSubmit,
+                queryFormSubmitClassName
+              )}
+            >
+              {queryFormSubmitContent}
+            </button>)
+          }
         </form>
       </div>
     );

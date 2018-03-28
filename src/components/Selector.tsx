@@ -31,6 +31,7 @@ export interface ISelectorProps {
   queryFormInputStyle?: object;
   queryFormSubmitStyle?: object;
   queryFormSubmitContent?: any;
+  disableQueryFormButton?: boolean;
 
   // search results style
   searchResultsClassName?: string;
@@ -219,6 +220,7 @@ export class Selector extends React.Component<ISelectorProps, ISelectorState> {
       queryFormInputStyle,
       queryFormSubmitStyle,
       queryFormSubmitContent,
+      disableQueryFormButton,
 
       searchResultClassName,
       searchResultStyle,
@@ -263,6 +265,7 @@ export class Selector extends React.Component<ISelectorProps, ISelectorState> {
           queryFormInputStyle={queryFormInputStyle}
           queryFormSubmitStyle={queryFormSubmitStyle}
           queryFormSubmitContent={queryFormSubmitContent}
+          disableQueryFormButton={disableQueryFormButton}
         />
 
         {showSuggestions && (
