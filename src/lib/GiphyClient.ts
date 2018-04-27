@@ -1,8 +1,8 @@
 // Documentation on the Giphy SDK client can be
 // found here: https://github.com/Giphy/giphy-js-sdk-core
-import * as GiphyJSClient from "giphy-js-sdk-core";
+import * as GiphyJSClient from 'giphy-js-sdk-core';
 
-import { Rating, ResultSort, IGifObject } from "../types";
+import { Rating, ResultSort, IGifObject } from '../types';
 
 export interface ISearchParams {
   q: string;
@@ -34,14 +34,14 @@ export class GiphyClient {
    * @param params ISearchParams
    */
   public searchGifs(params: ISearchParams): Promise<ISearchResult> {
-    return this.client.search("gifs", params).then(response => {
+    return this.client.search('gifs', params).then(response => {
       return { gifObjects: response.data };
     });
   }
 
   public trendingGifs(params: ITrendingParams): Promise<ISearchResult> {
-    return this.client.trending("gifs", params).then(response => {
-      return { gifObjects: response.data }
-    })
+    return this.client.trending('gifs', params).then(response => {
+      return { gifObjects: response.data };
+    });
   }
 }
