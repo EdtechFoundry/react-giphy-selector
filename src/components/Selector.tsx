@@ -1,14 +1,13 @@
-import * as React from "react";
-import * as cn from "classnames";
-
-import { Rating, ResultSort, IGifObject } from "../types";
-import { GiphyClient, ISearchResult } from "../lib/GiphyClient";
-import { QueryForm } from "./QueryForm";
-import { Suggestions } from "./Suggestions";
-import { SearchResults } from "./SearchResults";
-const defaultStyle = require("./Selector.css");
-const attributionMark = require("../img/PoweredBy_200px-White_HorizText.png");
-
+import * as React from 'react';
+import * as cn from 'classnames';
+import { Rating, ResultSort, IGifObject } from '../types';
+import { GiphyClient, ISearchResult } from '../lib/GiphyClient';
+import { QueryForm } from './QueryForm';
+import { Suggestions } from './Suggestions';
+import { SearchResults } from './SearchResults';
+import * as _ from 'lodash';
+const defaultStyle = require('./Selector.css');
+const attributionMark = require('../img/PoweredBy_200px-White_HorizText.png');
 export interface ISelectorProps {
   // main props
   apiKey: string;
@@ -61,6 +60,9 @@ export interface ISelectorProps {
   // footer style props
   footerClassName?: string;
   footerStyle?: object;
+
+  searchOnInputChange: boolean;
+  searchOnInputChangeDelay: number;
 }
 
 export interface ISelectorState {
@@ -79,9 +81,9 @@ export class Selector extends React.Component<ISelectorProps, ISelectorState> {
     showGiphyMark: true,
     queryInputPlaceholder: 'Enter search text',
     suggestions: [],
-    loaderContent: "Loading...",
+    loaderContent: 'Loading...',
     loaderStyle: {},
-    queryFormSubmitContent: "Search",
+    queryFormSubmitContent: 'Search',
     footerStyle: {},
     searchErrorStyle: {},
     searchResultsStyle: {},
@@ -92,9 +94,12 @@ export class Selector extends React.Component<ISelectorProps, ISelectorState> {
     suggestionStyle: {},
     suggestionsStyle: {},
     showTrendingInitially: false,
+    searchOnInputChange: true,
+    searchOnInputChangeDelay: 600,
   };
 
   public client: GiphyClient;
+  private debouncedOnQueryChange: Function;
 
   constructor(props: ISelectorProps) {
     super(props);
@@ -104,19 +109,24 @@ export class Selector extends React.Component<ISelectorProps, ISelectorState> {
 
     // Set initial state
     this.state = {
-      query: "",
+      query: '',
       isPending: false,
       searchError: null,
-      searchResult: null
+      searchResult: null,
     };
 
     this.onQueryChange = this.onQueryChange.bind(this);
     this.onQueryExecute = this.onQueryExecute.bind(this);
     this.onSuggestionSelected = this.onSuggestionSelected.bind(this);
     this.getTrendingGifs = this.getTrendingGifs.bind(this);
+
+    // setup debounced auto search
+    this.debouncedOnQueryChange = props.searchOnInputChange
+      ? _.debounce(this.onQueryExecute, props.searchOnInputChangeDelay)
+      : _.noop;
   }
 
-  componentDidMount () {
+  componentDidMount() {
     if (this.props.showTrendingInitially) {
       this.getTrendingGifs();
     }
@@ -129,22 +139,23 @@ export class Selector extends React.Component<ISelectorProps, ISelectorState> {
       searchError: null,
     });
 
-    this.client.trendingGifs({
-      rating,
-      limit,
-    })
-    .then((result: ISearchResult) => {
-      this.setState({
-        isPending: false,
-        searchResult: result
+    this.client
+      .trendingGifs({
+        rating,
+        limit,
+      })
+      .then((result: ISearchResult) => {
+        this.setState({
+          isPending: false,
+          searchResult: result,
+        });
+      })
+      .catch((err: Error) => {
+        this.setState({
+          isPending: false,
+          searchError: err,
+        });
       });
-    })
-    .catch((err: Error) => {
-      this.setState({
-        isPending: false,
-        searchError: err
-      });
-    });
   }
 
   /**
@@ -156,6 +167,7 @@ export class Selector extends React.Component<ISelectorProps, ISelectorState> {
   public onQueryChange(q: string, cb?: () => void): void {
     // Update the query
     this.setState({ query: q }, cb);
+    this.debouncedOnQueryChange();
   }
 
   /**
@@ -167,29 +179,32 @@ export class Selector extends React.Component<ISelectorProps, ISelectorState> {
 
     this.setState({
       isPending: true,
-      searchError: null
+      searchError: null,
     });
-
-    this.client
-      .searchGifs({
-        q: query,
-        rating,
-        limit,
-        sort,
-        offset: 0
-      })
-      .then((result: ISearchResult) => {
-        this.setState({
-          isPending: false,
-          searchResult: result
+    if (!query) {
+      this.getTrendingGifs();
+    } else {
+      this.client
+        .searchGifs({
+          q: query,
+          rating,
+          limit,
+          sort,
+          offset: 0,
+        })
+        .then((result: ISearchResult) => {
+          this.setState({
+            isPending: false,
+            searchResult: result,
+          });
+        })
+        .catch((err: Error) => {
+          this.setState({
+            isPending: false,
+            searchError: err,
+          });
         });
-      })
-      .catch((err: Error) => {
-        this.setState({
-          isPending: false,
-          searchError: err
-        });
-      });
+    }
   }
 
   /**
@@ -244,11 +259,10 @@ export class Selector extends React.Component<ISelectorProps, ISelectorState> {
       searchErrorStyle,
 
       footerClassName,
-      footerStyle
+      footerStyle,
     } = this.props;
 
-    const showSuggestions =
-      !!suggestions.length && !searchResult && !isPending && !searchError;
+    const showSuggestions = !!suggestions.length && !searchResult && !isPending && !searchError;
 
     return (
       <div style={selectorStyle}>
@@ -280,10 +294,7 @@ export class Selector extends React.Component<ISelectorProps, ISelectorState> {
         )}
 
         {isPending && (
-          <div
-            className={cn(defaultStyle.loader, loaderClassName)}
-            style={loaderStyle}
-          >
+          <div className={cn(defaultStyle.loader, loaderClassName)} style={loaderStyle}>
             {loaderContent}
           </div>
         )}
@@ -292,8 +303,7 @@ export class Selector extends React.Component<ISelectorProps, ISelectorState> {
           !!searchError && (
             <div
               className={cn(defaultStyle.searchError, searchErrorClassName)}
-              style={searchErrorStyle}
-            >
+              style={searchErrorStyle}>
               {searchError.message}
             </div>
           )}
@@ -312,16 +322,8 @@ export class Selector extends React.Component<ISelectorProps, ISelectorState> {
               onGifSelected={onGifSelected}
             />
           )}
-        <footer
-          className={cn(defaultStyle.footer, footerClassName)}
-          style={footerStyle}
-        >
-          {showGiphyMark && (
-            <img
-              className={defaultStyle.attributionMark}
-              src={attributionMark}
-            />
-          )}
+        <footer className={cn(defaultStyle.footer, footerClassName)} style={footerStyle}>
+          {showGiphyMark && <img className={defaultStyle.attributionMark} src={attributionMark} />}
         </footer>
       </div>
     );
