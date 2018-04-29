@@ -1,6 +1,6 @@
 {
   "name": "@edtechfoundry/react-giphy-selector",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "A search & select React.JS component for picking the perfect giphy.",
   "main": "lib/index.js",
   "typings": "./index.d.ts",
@@ -9,8 +9,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "./node_modules/.bin/webpack",
     "build-example": "./node_modules/.bin/webpack --config example/webpack.config.js",
-    "format": "./node_modules/.bin/prettier es5 --write \"{{src,example/src}/**/*.{js,ts,tsx},webpack.config.js}\"",
-    "prepublish": "npm run build"
+    "format":
+      "./node_modules/.bin/prettier es5 --write \"{{src,example/src}/**/*.{js,ts,tsx},webpack.config.js}\""
   },
   "repository": {
     "type": "git",
@@ -24,7 +24,7 @@
   "homepage": "https://github.com/tshaddix/react-giphy-selector#readme",
   "devDependencies": {
     "@types/classnames": "^2.2.3",
-    "@types/lodash": "^4.14.108",
+    "@types/lodash.debounce": "^4.0.3",
     "@types/react": "^16.0.33",
     "@types/react-dom": "^16.0.3",
     "awesome-typescript-loader": "^3.4.1",
@@ -41,7 +41,7 @@
   "dependencies": {
     "classnames": "^2.2.5",
     "giphy-js-sdk-core": "^1.0.2",
-    "lodash": "^4.17.10"
+    "lodash.debounce": "^4.0.8"
   },
   "peerDependencies": {
     "react": "^16.2.0"
